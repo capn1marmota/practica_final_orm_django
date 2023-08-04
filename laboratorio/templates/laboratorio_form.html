@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{% if laboratorio.pk %}Actualizar laboratorio{% else %}Ingresar datos del laboratorio{% endif %}</h1>
+    
+    <form method="post" {% if laboratorio.pk %}action="{% url 'laboratorio_update' laboratorio.pk %}"{% else %}action="{% url 'laboratorio_create' %}"{% endif %}>
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ laboratorio.nombre }}">
+        </div>
+        <div class="mb-3">
+            <label for="ciudad" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ laboratorio.ciudad }}">
+        </div>
+        <div class="mb-3">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" class="form-control" id="pais" name="pais" value="{{ laboratorio.pais }}">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
